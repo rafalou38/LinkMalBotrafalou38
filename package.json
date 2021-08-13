@@ -1,0 +1,20 @@
+{
+	"name": "LinkMalBot",
+	"version": "1.0.0",
+	"description": "bot discord de LinkMal",
+	"main": "src/index.js",
+	"repository": "none",
+	"author": "rafalou38",
+	"license": "MIT",
+	"scripts": {
+		"start": "node ./src/index.js"
+	},
+	"type": "module",
+	"devDependencies": {
+		"eslint": "^7.32.0"
+	},
+	"dependencies": {
+		"discord.js": "^13.0.1",
+		"dotenv": "^10.0.0"
+	}
+}
