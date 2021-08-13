@@ -17,9 +17,10 @@ const emojis = [
  * @param {number} index
  */
 function generateEmbed(client, member, index = 0) {
+	let warns = context.warns[member.id];
 	const embed = {
-		"title": "Warns of @rollable",
-		"description": "voila la liste des warns de @rollable",
+		"title": `Warns de ${member.user.username}`,
+		"description": `l'utilisateur <@${member.id}> a ${warns.length} warns`,
 		"color": 13849690,
 		"footer": {
 			"icon_url": client.user.avatarURL,
@@ -34,8 +35,8 @@ function generateEmbed(client, member, index = 0) {
 		},
 		"fields": []
 	};
+	warns = warns.slice(index, index + 5);
 	/** @type {{ value: string; date: string; }[]} */
-	const warns = context.warns[member.id].slice(index, index + 5);
 	warns.forEach((warn, i) => {
 		embed.fields.push({
 			name: emojis[i] + " " + warn.date,
