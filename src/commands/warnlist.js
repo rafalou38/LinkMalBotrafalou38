@@ -12,7 +12,7 @@ const emojis = [
 ];
 
 
-
+const warnsCount = 4;
 /**
  * @param {Discord.Client} client
  * @param {Discord.GuildMember} member
@@ -37,19 +37,28 @@ function generateEmbed(client, member, index = 0) {
 		},
 		"fields": []
 	};
-	warns = warns.slice(index, index + 4);
 	/** @type {{ value: string; date: string; }[]} */
-	warns.forEach((warn, i) => {
+	warns.slice(index, index + warnsCount).forEach((warn, i) => {
 		embed.fields.push({
 			name: emojis[i] + " " + warn.date,
 			value: "```" + warn.value + "```"
 		});
 	});
+	embed.fields.push({
+		name: "page",
+		value: `${index + 1}/${Math.ceil(warns.length / warnsCount)}`
+	});
 
 	return embed;
 }
 
-function generateComponents(i) {
+/**
+ * @param {number} index
+ * @param {Discord.GuildMember} member
+ */
+function generateComponents(index, member) {
+	let warns = context.warns[member.id];
+	warns = warns.slice(index, index + warnsCount);
 	let components = [];
 	let row = new Discord.MessageActionRow()
 		.addComponents(
@@ -59,7 +68,7 @@ function generateComponents(i) {
 					customId: "previous",
 					label: "◀",
 					style: "SECONDARY",
-					disabled: i === 0
+					disabled: index === 0
 				},
 			))
 		.addComponents(
@@ -90,43 +99,21 @@ function generateComponents(i) {
 				}
 			));
 	components.push(row);
-	row = new Discord.MessageActionRow()
-		.addComponents(
+	row = new Discord.MessageActionRow();
+
+	for (let i = 0; i < warnsCount; i++) {
+		row.addComponents(
 			new Discord.MessageButton(
 				{
 
-					customId: "1",
-					label: "1️⃣",
+					customId: (i + 1).toString(),
+					label: emojis[i],
 					style: "DANGER",
+					disabled: !warns[i]
 				},
-			))
-		.addComponents(
-			new Discord.MessageButton(
-				{
-
-					customId: "2",
-					label: "2️⃣",
-					style: "DANGER",
-				},
-			))
-		.addComponents(
-			new Discord.MessageButton(
-				{
-
-					customId: "3",
-					label: "3️⃣",
-					style: "DANGER",
-				},
-			))
-		.addComponents(
-			new Discord.MessageButton(
-				{
-
-					customId: "4",
-					label: "4️⃣",
-					style: "DANGER",
-				},
-			));
+			)
+		);
+	}
 	components.push(row);
 
 	return components;
@@ -163,7 +150,7 @@ export default async function (client, message) {
 			embeds: [
 				generateEmbed(client, target, 0)
 			],
-			components: generateComponents(0)
+			components: generateComponents(0, target)
 		});
 	} else {
 		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
