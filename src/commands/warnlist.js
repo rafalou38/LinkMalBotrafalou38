@@ -11,6 +11,8 @@ const emojis = [
 	"5️⃣",
 ];
 
+
+
 /**
  * @param {Discord.Client} client
  * @param {Discord.GuildMember} member
@@ -23,19 +25,19 @@ function generateEmbed(client, member, index = 0) {
 		"description": `l'utilisateur <@${member.id}> a ${warns.length} warns`,
 		"color": 13849690,
 		"footer": {
-			"icon_url": client.user.avatarURL,
+			"icon_url": client.user.avatarURL(),
 			"text": client.user.username
 		},
 		"thumbnail": {
-			"url": member.user.avatarURL
+			"url": member.user.avatarURL()
 		},
 		"author": {
 			"name": client.user.username,
-			"icon_url": client.user.avatarURL,
+			"icon_url": client.user.avatarURL(),
 		},
 		"fields": []
 	};
-	warns = warns.slice(index, index + 5);
+	warns = warns.slice(index, index + 4);
 	/** @type {{ value: string; date: string; }[]} */
 	warns.forEach((warn, i) => {
 		embed.fields.push({
@@ -47,6 +49,88 @@ function generateEmbed(client, member, index = 0) {
 	return embed;
 }
 
+function generateComponents(i) {
+	let components = [];
+	let row = new Discord.MessageActionRow()
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "previous",
+					label: "◀",
+					style: "SECONDARY",
+					disabled: i === 0
+				},
+			))
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "clearpage",
+					label: "❌",
+					style: "DANGER",
+				}
+			))
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "clear",
+					label: "🗑️",
+					style: "DANGER",
+				}
+			))
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "next",
+					label: "▶",
+					style: "SECONDARY",
+				}
+			));
+	components.push(row);
+	row = new Discord.MessageActionRow()
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "1",
+					label: "1️⃣",
+					style: "DANGER",
+				},
+			))
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "2",
+					label: "2️⃣",
+					style: "DANGER",
+				},
+			))
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "3",
+					label: "3️⃣",
+					style: "DANGER",
+				},
+			))
+		.addComponents(
+			new Discord.MessageButton(
+				{
+
+					customId: "4",
+					label: "4️⃣",
+					style: "DANGER",
+				},
+			));
+	components.push(row);
+
+	return components;
+}
 
 
 /**
@@ -73,11 +157,13 @@ export default async function (client, message) {
 	if (isAdmin) {
 		/**@type {string[]} */
 		const warns = context.warns[target.id] || [];
-		console.log(generateEmbed(client, target, 0));
+
+
 		message.reply({
 			embeds: [
 				generateEmbed(client, target, 0)
-			]
+			],
+			components: generateComponents(0)
 		});
 	} else {
 		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
