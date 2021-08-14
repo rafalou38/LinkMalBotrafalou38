@@ -31,7 +31,6 @@ export default async function (client, message) {
 			context.warns[target.id] = [{ value: args.slice(1).join(" "), date: new Date().toDateString() }];
 		}
 		saveContext();
-		console.log(context);
 	} else {
 		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
 	}

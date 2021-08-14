@@ -21,7 +21,6 @@ export const context = (text && JSON.parse(text)) || {
 
 	}
 };
-console.log(context);
 export async function saveContext() {
 	const text = JSON.stringify(context);
 	writeFileSync(SAVEFILE, text);
