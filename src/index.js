@@ -13,11 +13,11 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const prefix = "!";
 
 client.once("ready", async () => {
-	// const guilds = await client.guilds.fetch();
-	// guilds.forEach(async (oldGuild) => {
-	// 	const guild = await client.guilds.fetch(oldGuild.id);
-	// 	init(guild);
-	// });
+	const guilds = await client.guilds.fetch();
+	guilds.forEach(async (oldGuild) => {
+		const guild = await client.guilds.fetch(oldGuild.id);
+		init(guild);
+	});
 	console.log(`🤖 bot ${client.user.username}#${client.user.tag} succefuly started 🚀`);
 });
 

@@ -5,6 +5,8 @@ import clear from "./clear.js";
 import kick from "./kick.js";
 import ban from "./ban.js";
 import unban from "./unban.js";
+import mute from "./mute.js";
+import unmute from "./unmute.js";
 
 export const commands = {
 	help,
@@ -13,5 +15,7 @@ export const commands = {
 	clear,
 	kick,
 	ban,
-	unban
+	unban,
+	mute,
+	unmute
 };
