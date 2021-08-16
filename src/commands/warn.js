@@ -16,7 +16,7 @@ export default async function (client, message) {
 	const isAdmin = member.roles.cache.some(r => process.env.ADMIN_ROLES.split(", ").includes(r.name));
 
 	if (args.length < 2) {
-		await message.reply("mauvais arguments, attendu: ```!warn @user raison```");
+		await message.reply("Mauvais arguments, attendu: ```!warn @user raison```");
 		return;
 	}
 
@@ -32,6 +32,6 @@ export default async function (client, message) {
 		}
 		saveContext();
 	} else {
-		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
+		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
 	}
 }

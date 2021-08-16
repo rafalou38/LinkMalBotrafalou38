@@ -16,7 +16,7 @@ export default async function (client, message) {
 	const isAdmin = member.roles.cache.some(r => process.env.ADMIN_ROLES.split(", ").includes(r.name));
 
 	if (args.length < 2 || (args[1].match(/^\d+[smhj]$/) === null)) {
-		await message.reply("mauvais arguments, attendu: ```!mute @user durée(s|m|h|j) (reason)```");
+		await message.reply("Mauvais arguments, attendu: ```!mute @user durée(s|m|h|j) (reason)```");
 		return;
 	}
 
@@ -43,14 +43,14 @@ export default async function (client, message) {
 			} catch (error) { }
 			setTimeout(async () => {
 				removeRole(target, process.env.MUTED_ROLE_NAME);
-				message.reply(`l'utilisateur <@${target.id}> a été unmute par <@${client.user.id}>`);
+				message.reply(`L'utilisateur <@${target.id}> a été unmute par <@${client.user.id}>`);
 			}, ms);
-			message.reply(`l'utilisateur <@${target.id}> a été mute par <@${author.id}> pour ${duration + type}` + "```" + reason + "```");
+			message.reply(`L'utilisateur <@${target.id}> a été mute par <@${author.id}> pour ${duration + type}` + "```" + reason + "```");
 		} catch (error) {
 			console.error(error);
 			await message.reply(`Erreur ${target.displayName} n'a pas été mute`);
 		}
 	} else {
-		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
+		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
 	}
 }

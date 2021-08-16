@@ -16,7 +16,7 @@ export default async function (client, message) {
 
 	const args = content.split(" ").slice(1).filter(e => e).filter(e => e);
 	if (args.length < 1) {
-		await message.reply("mauvais arguments, attendu: ```!unmute @user```");
+		await message.reply("Mauvais arguments, attendu: ```!unmute @user```");
 		return;
 	}
 
@@ -28,12 +28,12 @@ export default async function (client, message) {
 		try {
 			removeRole(target, process.env.MUTED_ROLE_NAME);
 
-			message.reply(`l'utilisateur <@${target.id}> a été unmute par <@${author.id}>`);
+			message.reply(`L'utilisateur <@${target.id}> a été unmute par <@${author.id}>`);
 		} catch (error) {
 			console.error(error);
 			await message.reply(`Erreur ${target.displayName} n'a pas été unmute`);
 		}
 	} else {
-		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
+		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
 	}
 }

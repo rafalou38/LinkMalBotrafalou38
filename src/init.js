@@ -10,7 +10,7 @@ export default async function (guild) {
 		{
 			name: process.env.MUTED_ROLE_NAME,
 			color: "#000000",
-			reason: "to mute people",
+			reason: "To mute people",
 			permisions: {
 				SEND_MESSAGES: false,
 				SEND_TTS_MESSAGES: false,

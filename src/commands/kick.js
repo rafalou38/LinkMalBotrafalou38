@@ -20,7 +20,7 @@ export default async function (client, message) {
 	);
 
 	if (args.length < 1) {
-		await message.reply("mauvais arguments, attendu: ```!kick @user (raison)```");
+		await message.reply("Mauvais arguments, attendu: ```!kick @user (raison)```");
 		return;
 	}
 
@@ -30,12 +30,12 @@ export default async function (client, message) {
 	if (isAdmin) {
 		try {
 			await target.kick(args.slice(1).join(" "));
-			await message.reply(`l'utilisateur ${target.displayName} a été kick`);
+			await message.reply(`L'utilisateur ${target.displayName} a été kick`);
 		} catch (error) {
 			console.error(error);
 			await message.reply(`Erreur ${target.displayName} n'a pas été kick`);
 		}
 	} else {
-		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
+		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
 	}
 }

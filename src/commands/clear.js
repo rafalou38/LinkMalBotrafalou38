@@ -21,7 +21,7 @@ export default async function (client, message) {
 	);
 
 	if (args.length < 1 || args[0].match(/\D+/)) {
-		await message.reply("mauvais arguments, attendu: ```!clear nombre (@user)```");
+		await message.reply("Mauvais arguments, attendu: ```!clear nombre (@user)```");
 		return;
 	}
 	if (args[1]) {
@@ -56,6 +56,6 @@ export default async function (client, message) {
 			});
 		}
 	} else {
-		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
+		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
 	}
 }

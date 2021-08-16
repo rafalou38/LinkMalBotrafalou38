@@ -15,7 +15,7 @@ export default async function (client, message) {
 	const isAdmin = member.roles.cache.some(r => process.env.ADMIN_ROLES.split(", ").includes(r.name));
 
 	if (args.length < 1) {
-		await message.reply("mauvais arguments, attendu: ```!ban @user (raison)```");
+		await message.reply("Mauvais arguments, attendu: ```!ban @user (raison)```");
 		return;
 	}
 
@@ -24,12 +24,12 @@ export default async function (client, message) {
 	if (isAdmin) {
 		try {
 			await target.ban({ reason: args.slice(1).join(" ") });
-			await message.reply(`l'utilisateur ${target.displayName} a été banni`);
+			await message.reply(`L'utilisateur ${target.displayName} a été banni`);
 		} catch (error) {
 			console.error(error);
 			await message.reply(`Erreur ${target.displayName} n'a pas été banni`);
 		}
 	} else {
-		await message.reply("tu n'a pas l'autorisation d'utiliser cette commande");
+		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
 	}
 }

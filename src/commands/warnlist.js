@@ -14,7 +14,7 @@ function generateEmbed(client, member, index = 0) {
 	let warns = context.warns[member.id];
 	const embed = {
 		title: `Warns de ${member.user.username}`,
-		description: `l'utilisateur <@${member.id}> a ${warns.length} warns`,
+		description: `L'utilisateur <@${member.id}> a ${warns.length} warns`,
 		color: 13849690,
 		footer: {
 			icon_url: client.user.avatarURL(),
@@ -126,7 +126,7 @@ export default async function (client, message) {
 
 	if (args.length < 1) {
 		await message.reply(
-			"mauvais arguments, attendu: ```!warnlist @user```"
+			"Mauvais arguments, attendu: ```!warnlist @user```"
 		);
 		return;
 	}
@@ -144,10 +144,9 @@ export default async function (client, message) {
 			components: generateComponents(i, target),
 		});
 
-		const filter = (i) => true;
 		if (collector) collector.stop();
 		collector = message.channel.createMessageComponentCollector({
-			filter,
+			filter: (i)=>process.env.ADMIN_ROLES.split(", ").includes(i.user),
 			time: 30_000,
 		});
 
@@ -163,7 +162,7 @@ export default async function (client, message) {
 
 				case "ban":
 					{
-						await interaction.reply("entrez la raison du ban:");
+						await interaction.reply("Entrez la raison du ban:");
 						const banCollector =
 							message.channel.createMessageCollector({
 								filter: (m) => m.author.id === author.id,
@@ -173,7 +172,7 @@ export default async function (client, message) {
 							target.ban({ reason: message.content });
 
 							interaction.channel.send(
-								`l'utilisateur ${target.user.username} a été banni pour la raison:` +
+								`L'utilisateur ${target.user.username} a été banni pour la raison:` +
 									"```" +
 									message.content +
 									"```"
@@ -225,7 +224,7 @@ export default async function (client, message) {
 		});
 	} else {
 		await message.reply(
-			"tu n'a pas l'autorisation d'utiliser cette commande"
+			"Tu n'a pas l'autorisation d'utiliser cette commande"
 		);
 	}
 }

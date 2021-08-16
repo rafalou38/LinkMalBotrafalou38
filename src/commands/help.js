@@ -17,36 +17,36 @@ export default async function (client, message) {
 				fields: [
 					{
 						"name": "```!help```",
-						"value": "affiche ce message"
+						"value": "Affiche ce message"
 					},
 					{
 						"name": "```!ban @utilisateur (raison)```",
-						"value": "bannis l'utilisateur"
+						"value": "Bannis l'utilisateur"
 					},
 					{
 						"name": "```!unban @utilisateur```",
-						"value": "retirn le ban l'utilisateur"
+						"value": "Retirn le ban l'utilisateur"
 					},
 					{
 						"name": "```!kick @utilisateur (raison)```",
-						"value": "expulse l'utilisateur"
+						"value": "Expulse l'utilisateur"
 					},
 					{
 						"name": "```!mute @utilisateur (raison)```",
-						"value": "empeche l'utilisateur de parler"
+						"value": "Empeche l'utilisateur de parler"
 					},
 					{
 						"name": "```!unmute @utilisateur```",
-						"value": "restore la parole de l'utilisateur"
+						"value": "Restore la parole de l'utilisateur"
 					},
 					
 					{
 						"name": "```!warn @utilisateur```",
-						"value": "avertit l'utilisateur d'une faute"
+						"value": "Avertit l'utilisateur d'une faute"
 					},
 					{
 						"name": "```!warnlist @utilisateur```",
-						"value": "affiche les  warns d'un utilisateur"
+						"value": "Affiche les  warns d'un utilisateur"
 					},
 
 				]
