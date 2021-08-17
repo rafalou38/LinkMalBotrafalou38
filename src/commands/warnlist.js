@@ -146,7 +146,7 @@ export default async function (client, message) {
 
 		if (collector) collector.stop();
 		collector = message.channel.createMessageComponentCollector({
-			filter: (i)=>process.env.ADMIN_ROLES.split(", ").includes(i.user),
+			filter: (i)=>!!process.env.ADMIN_ROLES.split(", ").find(ar=>member.roles.cache.some(r=>r.name==ar)),
 			time: 30_000,
 		});
 

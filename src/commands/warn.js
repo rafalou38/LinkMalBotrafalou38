@@ -30,6 +30,7 @@ export default async function (client, message) {
 		} else {
 			context.warns[target.id] = [{ value: args.slice(1).join(" "), date: new Date().toDateString() }];
 		}
+		await message.reply(`L'utilisateur ${target.user.username} a été warn \nTappez \`!warnlist @${target.user.username}\` pour connaitre tous ses warns`);
 		saveContext();
 	} else {
 		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
