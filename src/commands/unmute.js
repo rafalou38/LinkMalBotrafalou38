@@ -12,17 +12,22 @@ import { removeRole } from "../utils/setRole.js";
  */
 export default async function (client, message) {
 	const { author, member, content, guild } = message;
-	const isAdmin = member.roles.cache.some(r => process.env.ADMIN_ROLES.split(", ").includes(r.name));
+	const isAdmin = member.roles.cache.some((r) =>
+		process.env.ADMIN_ROLES.split(", ").includes(r.name)
+	);
 
-	const args = content.split(" ").slice(1).filter(e => e).filter(e => e);
+	const args = content
+		.split(" ")
+		.slice(1)
+		.filter((e) => e)
+		.filter((e) => e);
 	if (args.length < 1) {
-		await message.reply("Mauvais arguments, attendu: ```!unmute @user```");
+		await message.reply("Mauvais arguments, attendu: ```;unmute @user```");
 		return;
 	}
 
 	let target = await getMemberFromText(guild, client, args[0]);
 	if (!target) return await message.reply(`${args[0]} n'existe pas`);
-
 
 	if (isAdmin) {
 		try {

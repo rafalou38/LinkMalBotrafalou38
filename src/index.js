@@ -1,4 +1,3 @@
-
 import dotenv from "dotenv";
 dotenv.config(); // load discord token from .env
 
@@ -7,10 +6,8 @@ import Discord from "discord.js";
 import init from "./init.js";
 import { commands } from "./commands/index.js";
 
-
-
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
-const prefix = "!";
+const prefix = ";";
 
 client.once("ready", async () => {
 	const guilds = await client.guilds.fetch();
@@ -32,5 +29,3 @@ client.on("messageCreate", async (message) => {
 });
 
 client.login(process.env.BOT_TOKEN);
-
-

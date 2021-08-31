@@ -30,14 +30,12 @@ function generateEmbed(client, member, index = 0) {
 		fields: [],
 	};
 	/** @type {{ value: string; date: string; }[]} */
-	warns
-		.slice(index * warnsCount, index * warnsCount + warnsCount)
-		.forEach((warn, i) => {
-			embed.fields.push({
-				name: emojis[i] + " " + warn.date,
-				value: "```" + warn.value + "```",
-			});
+	warns.slice(index * warnsCount, index * warnsCount + warnsCount).forEach((warn, i) => {
+		embed.fields.push({
+			name: emojis[i] + " " + warn.date,
+			value: "```" + warn.value + "```",
 		});
+	});
 	embed.fields.push({
 		name: "page",
 		value: `${index + 1}/${Math.ceil(warns.length / warnsCount)}`,
@@ -81,9 +79,7 @@ function generateComponents(index, member) {
 				customId: "next",
 				label: "▶",
 				style: "SECONDARY",
-				disabled:
-					warns.length === 0 ||
-					index + 1 === Math.ceil(warns.length / warnsCount),
+				disabled: warns.length === 0 || index + 1 === Math.ceil(warns.length / warnsCount),
 			})
 		);
 	components.push(row);
@@ -125,9 +121,7 @@ export default async function (client, message) {
 	);
 
 	if (args.length < 1) {
-		await message.reply(
-			"Mauvais arguments, attendu: ```!warnlist @user```"
-		);
+		await message.reply("Mauvais arguments, attendu: ```;warnlist @user```");
 		return;
 	}
 
@@ -146,7 +140,10 @@ export default async function (client, message) {
 
 		if (collector) collector.stop();
 		collector = message.channel.createMessageComponentCollector({
-			filter: (i)=>!!process.env.ADMIN_ROLES.split(", ").find(ar=>member.roles.cache.some(r=>r.name==ar)),
+			filter: (i) =>
+				!!process.env.ADMIN_ROLES.split(", ").find((ar) =>
+					member.roles.cache.some((r) => r.name == ar)
+				),
 			time: 30_000,
 		});
 
@@ -163,11 +160,10 @@ export default async function (client, message) {
 				case "ban":
 					{
 						await interaction.reply("Entrez la raison du ban:");
-						const banCollector =
-							message.channel.createMessageCollector({
-								filter: (m) => m.author.id === author.id,
-								time: 15_000,
-							});
+						const banCollector = message.channel.createMessageCollector({
+							filter: (m) => m.author.id === author.id,
+							time: 15_000,
+						});
 						banCollector.on("collect", async (message) => {
 							target.ban({ reason: message.content });
 
@@ -183,9 +179,7 @@ export default async function (client, message) {
 						banCollector.on("end", async (collected) => {
 							if (collected.size > 0) return;
 
-							interaction.channel.send(
-								"Trop lent annualtion du ban"
-							);
+							interaction.channel.send("Trop lent annualtion du ban");
 						});
 					}
 					break;
@@ -210,8 +204,7 @@ export default async function (client, message) {
 				default:
 					{
 						if (!interaction.customId.match(/\d/)) return;
-						const warnIndex =
-							4 * i + (parseInt(interaction.customId) - 1);
+						const warnIndex = 4 * i + (parseInt(interaction.customId) - 1);
 						warns.splice(warnIndex, 1);
 						saveContext();
 						interaction.update({
@@ -223,8 +216,6 @@ export default async function (client, message) {
 			}
 		});
 	} else {
-		await message.reply(
-			"Tu n'a pas l'autorisation d'utiliser cette commande"
-		);
+		await message.reply("Tu n'a pas l'autorisation d'utiliser cette commande");
 	}
 }

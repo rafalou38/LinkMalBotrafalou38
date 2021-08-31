@@ -16,41 +16,45 @@ export default async function (client, message) {
 				author: client.user.username,
 				fields: [
 					{
-						"name": "```!help```",
-						"value": "Affiche ce message"
+						name: "```;help```",
+						value: "Affiche ce message",
 					},
 					{
-						"name": "```!ban @utilisateur (raison)```",
-						"value": "Bannis l'utilisateur"
+						name: "```;ban @utilisateur (raison)```",
+						value: "Bannis l'utilisateur",
 					},
 					{
-						"name": "```!unban @utilisateur```",
-						"value": "Retirn le ban l'utilisateur"
+						name: "```;unban @utilisateur```",
+						value: "Retire le ban l'utilisateur",
 					},
 					{
-						"name": "```!kick @utilisateur (raison)```",
-						"value": "Expulse l'utilisateur"
+						name: "```;kick @utilisateur (raison)```",
+						value: "Expulse l'utilisateur",
 					},
 					{
-						"name": "```!mute @utilisateur (raison)```",
-						"value": "Empeche l'utilisateur de parler"
+						name: "```;mute @utilisateur (raison)```",
+						value: "Empêche l'utilisateur de parler",
 					},
 					{
-						"name": "```!unmute @utilisateur```",
-						"value": "Restore la parole de l'utilisateur"
-					},
-					
-					{
-						"name": "```!warn @utilisateur```",
-						"value": "Avertit l'utilisateur d'une faute"
-					},
-					{
-						"name": "```!warnlist @utilisateur```",
-						"value": "Affiche les  warns d'un utilisateur"
+						name: "```;unmute @utilisateur```",
+						value: "Restore la parole de l'utilisateur",
 					},
 
-				]
-			}
-		]
+					{
+						name: "```;warn @utilisateur```",
+						value: "Avertit l'utilisateur d'une faute",
+					},
+					{
+						name: "```;warnlist @utilisateur```",
+						value: "Affiche les  warns d'un utilisateur",
+					},
+					{
+						name: "```;clear nombre (@utilisateur)```",
+						value:
+							"Supprime le nombre de messages, si un utilisateur est doné: supprime uniquement les messages de cet utilisateur",
+					},
+				],
+			},
+		],
 	});
 }

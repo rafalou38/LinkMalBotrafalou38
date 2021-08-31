@@ -20,13 +20,13 @@ export default async function (client, message) {
 	);
 
 	if (args.length < 1) {
-		await message.reply("Mauvais arguments, attendu: ```!kick @user (raison)```");
+		await message.reply("Mauvais arguments, attendu: ```;kick @user (raison)```");
 		return;
 	}
 
 	let target = await getMemberFromText(guild, client, args[0]);
 	if (!target) return await message.reply(`${args[0]} n'existe pas`);
-	
+
 	if (isAdmin) {
 		try {
 			await target.kick(args.slice(1).join(" "));

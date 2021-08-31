@@ -11,11 +11,16 @@ import { getMemberFromText } from "../utils/commands.js";
  */
 export default async function (client, message) {
 	const { author, member, content, guild } = message;
-	const args = content.split(" ").slice(1).filter(e => e);
-	const isAdmin = member.roles.cache.some(r => process.env.ADMIN_ROLES.split(", ").includes(r.name));
+	const args = content
+		.split(" ")
+		.slice(1)
+		.filter((e) => e);
+	const isAdmin = member.roles.cache.some((r) =>
+		process.env.ADMIN_ROLES.split(", ").includes(r.name)
+	);
 
 	if (args.length < 1) {
-		await message.reply("Mauvais arguments, attendu: ```!ban @user (raison)```");
+		await message.reply("Mauvais arguments, attendu: ```;ban @user (raison)```");
 		return;
 	}
 

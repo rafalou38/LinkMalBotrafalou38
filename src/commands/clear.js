@@ -21,7 +21,7 @@ export default async function (client, message) {
 	);
 
 	if (args.length < 1 || args[0].match(/\D+/)) {
-		await message.reply("Mauvais arguments, attendu: ```!clear nombre (@user)```");
+		await message.reply("Mauvais arguments, attendu: ```;clear nombre (@user)```");
 		return;
 	}
 	if (args[1]) {
